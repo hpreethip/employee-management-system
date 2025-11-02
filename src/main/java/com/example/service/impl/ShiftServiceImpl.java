@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ShiftRequest;
 import com.example.dto.ShiftResponse;
+import com.example.entity.Employee;
+import com.example.entity.Shift;
+import com.example.entity.Skill;
 import com.example.exception.ResourceNotFoundException;
-import com.example.model.Employee;
-import com.example.model.Shift;
-import com.example.model.Skill;
 import com.example.repo.EmployeeRepo;
 import com.example.repo.ShiftRepo;
 import com.example.repo.SkillRepo;

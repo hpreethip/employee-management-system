@@ -1,10 +1,14 @@
-package com.example.model;
+package com.example.entity;
 
+import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.List;
+
+import com.example.constant.ContractTypeName;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,7 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table
-public class Employee {
+public class ContractType {
 
     @Version
     private Long version;
@@ -25,16 +29,14 @@ public class Employee {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "name", unique = true)
+    @Enumerated(EnumType.STRING)
+    private ContractTypeName name;
 
-    @Column(name = "contract_type_id")
-    private String contractTypeId;
+    @Column(name = "rate")
+    private BigDecimal rate;
 
-    @Column(name = "shift_ids")
-    private List<String> shiftIds;
-
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false, updatable = false)
     private ZonedDateTime CreatedAt;
 
     @Column(name = "updated_at")

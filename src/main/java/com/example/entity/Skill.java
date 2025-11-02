@@ -1,9 +1,9 @@
-package com.example.model;
+package com.example.entity;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
-import com.example.constant.ContractTypeName;
+import com.example.constant.SkillName;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,7 +19,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table
-public class ContractType {
+public class Skill {
 
     @Version
     private Long version;
@@ -31,7 +31,7 @@ public class ContractType {
 
     @Column(name = "name", unique = true)
     @Enumerated(EnumType.STRING)
-    private ContractTypeName name;
+    private SkillName name;
 
     @Column(name = "rate")
     private BigDecimal rate;

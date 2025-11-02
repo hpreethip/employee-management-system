@@ -3,7 +3,7 @@ package com.example.repo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.model.Shift;
+import com.example.entity.Shift;
 
 @Repository
 public interface ShiftRepo extends JpaRepository<Shift, String> {

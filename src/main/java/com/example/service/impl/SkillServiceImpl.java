@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.SkillRequest;
 import com.example.dto.SkillResponse;
-import com.example.model.Skill;
+import com.example.entity.Skill;
 import com.example.repo.SkillRepo;
 import com.example.service.SkillService;
 import com.fasterxml.jackson.databind.ObjectMapper;
