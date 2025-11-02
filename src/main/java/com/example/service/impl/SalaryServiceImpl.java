@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.dto.SalaryResponse;
 import com.example.entity.ContractType;
@@ -34,6 +35,7 @@ public class SalaryServiceImpl implements SalaryService {
     private ShiftRepo shiftRepo;
 
     @Override
+    @Transactional(readOnly = true)
     public SalaryResponse calculateSalary(String employeeId) {
 
         BigDecimal ctPay = BigDecimal.ZERO;

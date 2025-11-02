@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.dto.ContractTypeRequest;
 import com.example.dto.ContractTypeResponse;
@@ -22,6 +23,7 @@ public class ContractTypeServiceImpl implements ContractTypeService {
     private ObjectMapper objectMapper;
 
     @Override
+    @Transactional
     public ContractTypeResponse createContractType(ContractTypeRequest req) {
 
         ContractType ct = new ContractType();

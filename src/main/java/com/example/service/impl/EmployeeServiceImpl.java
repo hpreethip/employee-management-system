@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.dto.EmployeeRequest;
 import com.example.dto.EmployeeResponse;
@@ -35,6 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private ObjectMapper objectMapper;
 
     @Override
+    @Transactional
     public EmployeeResponse createEmployee(EmployeeRequest req) {
 
         Optional<ContractType> ct = contractTypeRepo.findById(req.getContractTypeId());
@@ -54,6 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public EmployeeResponse getEmployee(String id) {
         Optional<Employee> e = employeeRepo.findById(id);
         if (!e.isPresent()) {
@@ -63,6 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<EmployeeResponse> getEmployees(Pageable pageable) {
         Page<Employee> employeePage = employeeRepo.findAll(pageable);
         List<EmployeeResponse> content = employeePage.getContent().stream()
