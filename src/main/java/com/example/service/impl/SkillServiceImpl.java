@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.dto.SkillRequest;
 import com.example.dto.SkillResponse;
@@ -22,6 +23,7 @@ public class SkillServiceImpl implements SkillService {
     private ObjectMapper objectMapper;
 
     @Override
+    @Transactional
     public SkillResponse createSkill(SkillRequest req) {
 
         Skill s = new Skill();

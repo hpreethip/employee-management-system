@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.dto.ShiftRequest;
 import com.example.dto.ShiftResponse;
@@ -35,6 +36,7 @@ public class ShiftServiceImpl implements ShiftService {
     private ObjectMapper objectMapper;
 
     @Override
+    @Transactional
     public ShiftResponse addShift(ShiftRequest req) {
 
         Optional<Employee> e = employeeRepo.findById(req.getEmployeeId());
