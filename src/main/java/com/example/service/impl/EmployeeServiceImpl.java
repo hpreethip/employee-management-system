@@ -2,24 +2,23 @@ package com.example.service.impl;
 
 import java.time.ZonedDateTime;
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.EmployeeRequest;
 import com.example.dto.EmployeeResponse;
-import com.example.dto.ShiftRequest;
-import com.example.dto.ShiftResponse;
 import com.example.exception.ResourceNotFoundException;
 import com.example.model.ContractType;
 import com.example.model.Employee;
-import com.example.model.Shift;
-import com.example.model.Skill;
 import com.example.repo.ContractTypeRepo;
 import com.example.repo.EmployeeRepo;
-import com.example.repo.ShiftRepo;
-import com.example.repo.SkillRepo;
 import com.example.service.EmployeeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -30,13 +29,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     private EmployeeRepo employeeRepo;
 
     @Autowired
-    private ShiftRepo shiftRepo;
-
-    @Autowired
     private ContractTypeRepo contractTypeRepo;
-
-    @Autowired
-    private SkillRepo skillRepo;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -61,28 +54,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public ShiftResponse addShift(ShiftRequest req) {
-
-        Optional<Employee> e = employeeRepo.findById(req.getEmployeeId());
+    public EmployeeResponse getEmployee(String id) {
+        Optional<Employee> e = employeeRepo.findById(id);
         if (!e.isPresent()) {
-            throw new ResourceNotFoundException("Employee", "employeeId", req.getEmployeeId());
+            throw new ResourceNotFoundException("Employee", "employeeId", id);
         }
+        return objectMapper.convertValue(e.get(), EmployeeResponse.class);
+    }
 
-        Optional<Skill> skill = skillRepo.findById(req.getSkillId());
-        if (!skill.isPresent()) {
-            throw new ResourceNotFoundException("Skill", "skillId", req.getSkillId());
-        }
-
-        Shift s = new Shift();
-        s.setEmployeeId(req.getEmployeeId());
-        s.setSkillId(req.getSkillId());
-        s.setTotalDuration(req.getTotalDuration());
-        s.setBreakDuration(req.getBreakDuration());
-        s.setCreatedAt(ZonedDateTime.now());
-        s.setUpdatedAt(ZonedDateTime.now());
-        s = shiftRepo.save(s);
-
-        return objectMapper.convertValue(s, ShiftResponse.class);
+    @Override
+    public Page<EmployeeResponse> getEmployees(Pageable pageable) {
+        Page<Employee> employeePage = employeeRepo.findAll(pageable);
+        List<EmployeeResponse> content = employeePage.getContent().stream()
+                .map(emp -> objectMapper.convertValue(emp, EmployeeResponse.class))
+                .collect(Collectors.toList());
+        return new PageImpl<>(content, pageable, employeePage.getTotalElements());
     }
 
 }
