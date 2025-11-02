@@ -1,14 +1,10 @@
-package com.example.model;
+package com.example.entity;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
-import com.example.constant.SkillName;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -19,7 +15,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table
-public class Skill {
+public class Shift {
 
     @Version
     private Long version;
@@ -29,15 +25,20 @@ public class Skill {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "name", unique = true)
-    @Enumerated(EnumType.STRING)
-    private SkillName name;
+    @Column(name = "employee_id")
+    private String employeeId;
 
-    @Column(name = "rate")
-    private BigDecimal rate;
+    @Column(name = "skill_id")
+    private String skillId;
 
-    @Column(name = "created_at")
-    private ZonedDateTime CreatedAt;
+    @Column(name = "total_duration")
+    private BigDecimal totalDuration;
+
+    @Column(name = "break_duration")
+    private BigDecimal breakDuration;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private ZonedDateTime createdAt;
 
     @Column(name = "updated_at")
     private ZonedDateTime updatedAt;

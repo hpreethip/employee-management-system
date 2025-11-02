@@ -1,7 +1,7 @@
-package com.example.model;
+package com.example.entity;
 
-import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 @Entity
 @Table
-public class Shift {
+public class Employee {
 
     @Version
     private Long version;
@@ -25,20 +25,17 @@ public class Shift {
     @Column(name = "id")
     private String id;
 
-    @Column(name = "employee_id")
-    private String employeeId;
+    @Column(name = "name")
+    private String name;
 
-    @Column(name = "skill_id")
-    private String skillId;
+    @Column(name = "contract_type_id")
+    private String contractTypeId;
 
-    @Column(name = "total_duration")
-    private BigDecimal totalDuration;
+    @Column(name = "shift_ids")
+    private List<String> shiftIds;
 
-    @Column(name = "break_duration")
-    private BigDecimal breakDuration;
-
-    @Column(name = "created_at")
-    private ZonedDateTime createdAt;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private ZonedDateTime CreatedAt;
 
     @Column(name = "updated_at")
     private ZonedDateTime updatedAt;

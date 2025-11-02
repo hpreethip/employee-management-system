@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.dto.SalaryResponse;
+import com.example.entity.ContractType;
+import com.example.entity.Employee;
+import com.example.entity.Shift;
+import com.example.entity.Skill;
 import com.example.exception.ResourceNotFoundException;
-import com.example.model.ContractType;
-import com.example.model.Employee;
-import com.example.model.Shift;
-import com.example.model.Skill;
 import com.example.repo.ContractTypeRepo;
 import com.example.repo.EmployeeRepo;
 import com.example.repo.ShiftRepo;

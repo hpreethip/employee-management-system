@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.EmployeeRequest;
 import com.example.dto.EmployeeResponse;
+import com.example.entity.ContractType;
+import com.example.entity.Employee;
 import com.example.exception.ResourceNotFoundException;
-import com.example.model.ContractType;
-import com.example.model.Employee;
 import com.example.repo.ContractTypeRepo;
 import com.example.repo.EmployeeRepo;
 import com.example.service.EmployeeService;

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.dto.ContractTypeRequest;
 import com.example.dto.ContractTypeResponse;
-import com.example.model.ContractType;
+import com.example.entity.ContractType;
 import com.example.repo.ContractTypeRepo;
 import com.example.service.ContractTypeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
